@@ -1,16 +1,15 @@
 import os
 import re
-import uuid
 import time
+import threading
+import hashlib
+from datetime import datetime, timedelta
+from calendar import monthrange
+from ics import Calendar, Event
 import pdfplumber
 import pandas as pd
-import threading
 from flask import Flask, render_template, request, send_file, session, redirect, url_for
-from ics import Calendar, Event
-from datetime import datetime, timedelta
 import pytz
-from calendar import monthrange
-import hashlib
 
 # Configurazione applicazione
 app = Flask(__name__)
