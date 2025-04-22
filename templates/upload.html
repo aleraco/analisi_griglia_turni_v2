@@ -170,5 +170,85 @@
             label.querySelector('span:last-child').textContent = '';
         });
     </script>
+
+<div id="privacy-banner" style="display: none;">
+  <div id="privacy-content">
+    <p class="mb-0 small">Questo sito non utilizza cookie di tracciamento. I dati inseriti vengono elaborati solo per generare file calendario e non vengono condivisi. <a href="#">Scopri di più</a>.</p>
+    <button id="privacy-ok" class="btn btn-sm btn-primary ms-3">OK</button>
+  </div>
+</div>
+
+<style>
+  #privacy-banner {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #f8f9fa;
+    padding: 10px 0;
+    border-top: 1px solid #dee2e6;
+    z-index: 1050;
+    box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+  }
+  #privacy-content {
+    max-width: 960px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+  }
+</style>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    const banner = document.getElementById('privacy-banner');
+    const button = document.getElementById('privacy-ok');
+
+    if (!localStorage.getItem('privacyAccepted')) {
+      banner.style.display = 'block';
+    }
+
+    button.addEventListener('click', () => {
+      localStorage.setItem('privacyAccepted', 'true');
+      banner.style.display = 'none';
+    });
+  });
+</script>
+
+<!-- Privacy Modal -->
+<div class="modal fade" id="privacyModal" tabindex="-1" aria-labelledby="privacyModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="privacyModalLabel">Privacy Policy</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Chiudi"></button>
+      </div>
+      <div class="modal-body">
+        <p>Questa applicazione web ha lo scopo di analizzare file PDF contenenti nomi e turni, generare file calendario (.ics) personalizzati e gestire database interni per facilitare la consultazione dei dati.</p>
+        <p><strong>Dati raccolti:</strong> Nomi e cognomi presenti nei file PDF caricati dagli utenti e i relativi dati di turno codificati. Non vengono raccolti cookie di tracciamento o dati personali aggiuntivi.</p>
+        <p><strong>Finalità:</strong> I dati vengono elaborati esclusivamente per la generazione dei calendari personali e non vengono condivisi con terzi.</p>
+        <p><strong>Cookie:</strong> Nessun cookie di profilazione viene utilizzato. Solo cookie tecnici possono essere temporaneamente usati per il corretto funzionamento della sessione.</p>
+        <p><strong>Diritti:</strong> È possibile richiedere la cancellazione dei dati scrivendo all'amministratore del sito all'indirizzo aleraco@gmail.com.</p>
+	  </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Fa aprire il modale cliccando su "Scopri di più"
+  document.addEventListener('DOMContentLoaded', function () {
+    const link = document.querySelector('#privacy-banner a');
+    if (link) {
+      link.setAttribute('href', '#');
+      link.setAttribute('data-bs-toggle', 'modal');
+      link.setAttribute('data-bs-target', '#privacyModal');
+    }
+  });
+</script>
 </body>
+
+
 </html>
